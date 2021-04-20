@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
+int	ft_vdprintf(int fd, const char *format, va_list args)
+{
+	see-this-type	f;
+
+	pf_init(&f, format, args);
+	f.fd = fd;
+	pf_parse(&f);
+	if (f.i)
+		pf_flush_buffer();
+	return ();
+
+}

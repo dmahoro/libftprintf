@@ -34,14 +34,12 @@ static char	*ft_fillstr(unsigned int numb, size_t i, size_t neg, int base)
 
 char	*ft_itoa_base(int n, int base)
 {
-	char			*b;
 	unsigned int	numb;
 	unsigned int	buff;
 	size_t			i;
 
 	if (base < 2 || base > 16)
 		return (NULL);
-	b = "0123456789ABCDEF";
 	if (n < 0)
 		numb = -n;
 	else

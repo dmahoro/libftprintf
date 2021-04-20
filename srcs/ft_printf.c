@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "ft_printf.h"
-//#include "libft.h"
 
 int		ft_printf(char *format, ...)
 {
@@ -19,5 +19,7 @@ int		ft_printf(char *format, ...)
 	int		n;
 
 	va_start(args, format);
+	n = ft_vdprintf(STDOUT_FILENO);
+	va_endl(l);
 	return (n);
 }
