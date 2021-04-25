@@ -36,9 +36,27 @@ char	*pf_convert(t_pf_format *f, uint64_t n, int base, int lower)
 	return (d);
 }
 
-void	pf_parse(t_pf_format *f)
+void	pf_flush_buffer(t_pf_format *f)
 {
-	while (*f->s && !(f->pf_flags & PF_ERROR))
-		if (*f->s != '%')
-			pf_putchar(f, );
+	if (f->pf_flags & PF_ERROR)
+		return ;
+	if (f->pf_flags & PF_USE_STR)
+	{
+		if (f->pflags & PF_USE_LEFT)
+		{
+			if (!f->left || f->left - 1 < (size_t)f->i)
+			{
+				f->i = f->left - (f-left > 0);
+				f->left = (f->left > 0);
+			}
+			else
+				f->left -= f->i;
+		}
+		f->str = (char *)ft_memcpy(f->str, f->buff, f->i) + f->i;
+	}
+	else if (write(f->fd, f->buff, f->i) < 0)
+		f->pf_flags |= PF_ERROR;
+	f->i = 0;
 }
+
+

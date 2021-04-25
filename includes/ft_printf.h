@@ -47,12 +47,12 @@ typedef struct s_pf_format
 {
 	char		buff[PF_BUFF_SIZE];
 	char		conv[PF_CONVERT_BUFF_SIZE + 1];
-	size_t		i;
+	int		i;
 	size_t		left;
 	const char	*s;
-	va_list		argsptrs;
+	va_list		valst;
 	t_pf_flag	pf_flags: PF_E_PF_FLAG_MAX;
-	size_t		size;
+	int		size;
 	int		fd;
 	char		*str;
 	t_flag		flags: PF_E_FLAG_MAX;
@@ -72,7 +72,7 @@ void		pf_parse_c(t_pf_format *f);
 void		pf_parse_s(t_pf_format *f, char *s);
 void		pf_parse_p(t_pf_format *f, uint64_t n);
 void		pf_parse_di(t_pf_format *f, int64_t n);
-void		pf_parse_o(t_pf_format *f, uint64_t n);
+//void		pf_parse_o(t_pf_format *f, uint64_t n);
 void		pf_parse_u(t_pf_format *f, uint64_t n);
 void		pf_parse_x(t_pf_format *f, uint64_t n);
 void		pf_parse_n(t_pf_format *f, int64_t *size);

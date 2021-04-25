@@ -20,7 +20,6 @@ int	ft_vdprintf(int fd, const char *format, va_list args)
 	f.fd = fd;
 	pf_parse(&f);
 	if (f.i)
-		pf_flush_buffer();
-	return (f);
-
+		pf_flush_buffer(&f);
+	return (f->pf_flags & PF_ERROR ? -1 : f->size);
 }
