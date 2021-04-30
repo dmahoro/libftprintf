@@ -6,7 +6,7 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 20:01:42 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/04/19 23:28:59 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/04/30 09:52:02 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef enum e_flag
 	PF_ML_H = 0x100,
 	PF_ML_HH = 0x200,
 	PF_E_FLAG_MAX = 10
-} t_flag;
+}	t_flag;
 
 typedef enum e_pf_flag
 {
@@ -41,25 +41,25 @@ typedef enum e_pf_flag
 	PF_USE_STR = 0x2,
 	PF_USE_LEFT = 0x4,
 	PF_E_PF_FLAG_MAX = 3
-} t_pf_flag;
+}	t_pf_flag;
 
 typedef struct s_pf_format
 {
 	char		buff[PF_BUFF_SIZE];
 	char		conv[PF_CONVERT_BUFF_SIZE + 1];
-	int		i;
+	int			i;
 	size_t		left;
 	const char	*s;
 	va_list		valst;
-	t_pf_flag	pf_flags: PF_E_PF_FLAG_MAX;
-	int		size;
-	int		fd;
+	t_pf_flag 	pf_flags : PF_E_PF_FLAG_MAX;
+	int			size;
+	int			fd;
 	char		*str;
 	t_flag		flags: PF_E_FLAG_MAX;
 	size_t		dsize;
-	int		precision;
+	int			precision;
 	size_t		width;
-} t_pf_format;
+}	t_pf_format;
 
 int		ft_printf(char const *format, ...);
 int		ft_vdprintf(int fd, const char *format, va_list ap);
