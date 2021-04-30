@@ -31,6 +31,8 @@ char	*pf_convert(t_pf_format *f, uint64_t n, int base, int lower)
 			c = 1;
 		}
 		i = n % base;
+		*--d = i + (i < 10 ? '0' : lower + 'A' - 10);
+		n /= base;
 	}
 	f->dsize = f->conv + PF_CONVERT_BUFF_SIZE - d;
 	return (d);
