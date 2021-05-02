@@ -18,7 +18,16 @@ LIBFT		= libft/libft.a
 SRCS_DIR	= srcs
 INCLS_DIR	= includes
 BUILD_DIR	= build
-SRCS_FLS	= ft_printf.c get_next_line.c
+SRCS_FLS	= ft_printf.c \
+		  ft_vdprintf.c \
+		  pf_parse.c \
+		  pf_parse_cs.c \
+		  pf_parse_object_handler.c \
+		  pf_parse_pdiux.c \
+		  pf_parse_utils.c \
+		  pf_print_utils.c \
+		  pf_utils.c
+
 SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_FLS))
 _OBJS		= $(patsubst $(SRCS_DIR)/%.c, %.o, $(SRCS))
 OBJS		= $(addprefix $(BUILD_DIR)/, $(_OBJS))

@@ -1,45 +1,7 @@
 
 #include "ft_printf.h"
 
-void	pf_putchar(t_pf_format *f, char const c)
-{
-	++f->size;
-	f->buff[f->i++] = c;
-	if (f->i == PF_BUFF_SIZE)
-		pf_flush_buffer(f);
-}
-
-void	pf_putpadding(t_pf_format *f)
-{
-	char c;
-
-	c = (f->flags & PF_FL_ZERO) ? '0' : ' ';
-	while (f->width--)
-		pf_putchar(f, c);
-}
-
-int	pf_wclen(const wchar_t c)
-{
-	if (c < 0x80)
-		return (1);
-	else if (c < 0x800)
-		return (2);
-	return (4 - (c < 0x10000));
-}
-
-void	pf_putwchar(t_pf_format *f, const wchar_t c)
-{
-	char	b[4];
-	int	i;
-	int	n;
-
-	n = pf_wcrtomb(b, c);
-	i = 0;
-	while (i < n)
-		pf_putchar(f, b[i++]);	
-}
-
-static int	pf_wcrtomb(char *b, wchar_t c)
+int	pf_wcrtomb(char *b, wchar_t c)
 {
 	int i;
 
@@ -74,3 +36,11 @@ static int	pf_wcrtomb(char *b, wchar_t c)
 	return (i);
 }
 
+int	pf_wclen(const wchar_t c)
+{
+	if (c < 0x80)
+		return (1);
+	else if (c < 0x800)
+		return (2);
+	return (4 - (c < 0x10000));
+}

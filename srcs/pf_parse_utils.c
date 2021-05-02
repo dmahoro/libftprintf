@@ -1,6 +1,36 @@
 
 #include "ft_printf.h"
 
+char	*pf_convert(t_pf_format *f, uint64_t n, int base, int lower)
+{
+	char	*d;
+	int	i;
+	int	c;
+
+	if (lower)
+		lower = 32;
+	d = f->conv + PF_CONVERT_BUFF_SIZE;
+	c = 0;
+	if (!n && f->precision)
+		*--d = '0';
+	while (n)
+	{
+		if ((f->flags & PF_FL_APOSTROPHE) && ++c == 4)
+		{
+			*--d = ',';
+			c = 1;
+		}
+		i = n % base;
+		if (i < 10)
+			*--d = i + '0';
+		else
+			*--d = i + (lower + 'A' - 10);
+		n /= base;
+	}
+	f->dsize = f->conv + PF_CONVERT_BUFF_SIZE - d;
+	return (d);
+}
+
 int64_t	pf_va_arg(t_flag flags, va_list valst)
 {
 	int64_t	n;

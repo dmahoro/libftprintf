@@ -70,11 +70,3 @@ void	pf_parse_s(t_pf_format *f, char *s)
 		pf_putpadding(f);
 	f->s++;
 }
-
-void	pf_parse_p(t_pf_format *f, uint64_t n)
-{
-	const char	*s;
-
-	f->flags |= PF_LL;
-	s = pf_convert(f, n, 16, 1);
-}

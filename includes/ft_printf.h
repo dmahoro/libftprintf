@@ -22,16 +22,16 @@
 
 typedef enum e_flag
 {
-	PF_FL_MINUS = 0x1,
-	PF_FL_ZERO = 0x2,
-	PF_FL_APOSTROPHE = 0x4,
-	PF_FL_HASH = 0x8,
-	PF_FL_SPACE = 0x10,
-	PF_FL_PLUS = 0x20,
-	PF_ML_L = 0x40,
-	PF_ML_LL = 0x80,
-	PF_ML_H = 0x100,
-	PF_ML_HH = 0x200,
+	PF_MINUS = 0x1,
+	PF_ZERO = 0x2,
+	PF_APOSTROPHE = 0x4,
+	PF_HASH = 0x8,
+	PF_SPACE = 0x10,
+	PF_PLUS = 0x20,
+	PF_L = 0x40,
+	PF_LL = 0x80,
+	PF_H = 0x100,
+	PF_HH = 0x200,
 	PF_E_FLAG_MAX = 10
 }	t_flag;
 
@@ -85,9 +85,9 @@ void		pf_putstr(t_pf_format *f, const char *s);
 void		pf_putwchar(t_pf_format *f, const wchar_t c);
 int64_t		pf_va_arg(t_flag f, va_list argsptrs);
 uint64_t	pf_va_arg_unsigned(t_flag, va_list argsptrs);
-int		pf_wclen(char wchar_t c);
+int		pf_wclen(const wchar_t c);
+int		pf_wcrtomb(char *b, wchar_t c);
 
 void		pf_flush_buffer(t_pf_format *f);
-
 
 #endif

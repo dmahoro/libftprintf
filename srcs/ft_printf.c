@@ -13,13 +13,13 @@
 #include <unistd.h>
 #include "ft_printf.h"
 
-int		ft_printf(char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		n;
 
 	va_start(args, format);
-	n = ft_vdprintf(STDOUT_FILENO);
-	va_endl(l);
+	n = ft_vdprintf(STDOUT_FILENO, format, args);
+	va_end(args);
 	return (n);
 }
