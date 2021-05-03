@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_parse_object_handler.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/03 20:12:38 by dmahoro-          #+#    #+#             */
+/*   Updated: 2021/05/03 22:21:53 by dmahoro-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -21,7 +32,10 @@ void	pf_flush_buffer(t_pf_format *f)
 		{
 			if (!f->left || f->left - 1 < (size_t)f->i)
 			{
-				f->i = f->left - (f-left > 0);
+				if (f->left > 0)
+					f->i = f->left - 1;
+				else
+					f->i = f->left;
 				f->left = (f->left > 0);
 			}
 			else
@@ -33,5 +47,3 @@ void	pf_flush_buffer(t_pf_format *f)
 		f->pf_flags |= PF_ERROR;
 	f->i = 0;
 }
-
-

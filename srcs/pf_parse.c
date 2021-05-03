@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/03 20:10:58 by dmahoro-          #+#    #+#             */
+/*   Updated: 2021/05/03 20:55:02 by dmahoro-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_print.h"
 #include "libft.h"
 
 static int	pf_parse_field(t_pf_format *f)
 {
-	int	precision;
+	int		precision;
 	long	n;
 
 	n = 0;
@@ -18,10 +29,22 @@ static int	pf_parse_field(t_pf_format *f)
 			n = n * 10 + (*f->s++ - '0');
 	if (n >= 0)
 		return (n);
-	n = precision ? -1 : -n;
-	if (!precision)
+	if (precision)
+		n = -1;
+	else
+	{
+		n = -n;
 		f->flags |= PF_FL_MINUS;
+	}
 	return (n);
+}
+
+static t_flag	handle_L_LL(t_flag flags)
+{
+	if (f->flags & PF_FL_L)
+		return (PF_FL_LL);
+	else
+		return (PF_FL_L);
 }
 
 static int	pf_parse_subflags(t_pf_format *f)
@@ -39,17 +62,12 @@ static int	pf_parse_subflags(t_pf_format *f)
 	else if (*f->s == '+')
 		f->flags |= PF_FL_PLUS;
 	else if (*f->s == 'l')
-	{
-		if (f->flags & PF_FL_L)
-			f->flags |= PF_FL_LL;
-		else	
-			f->flags |= PF_FL_L;
-	}
+		f->flags |= handle(t->flags);
 	else if (*f->s == 'h')
 	{
 		if (f->flags & PF_FL_H)
 			f->flags |= PF_FL_HH;
-		else	
+		else
 			f->flags |= PF_FL_H;
 	}
 	else
@@ -65,22 +83,24 @@ static int	pf_parse_flags(t_pf_format *f)
 	f->precision = -1;
 	f->width = 0;
 	while (*f->s)
+	{
 		if (*f->s == '*' || (*f->s >= '1' && *f->s <= 9))
 			f->width = pf_parse_field(f);
 		else if (*f->s == '.')
 			f->precision = pf_parse_field(f);
 		else if (!pf_parse_subflags(f))
 			break ;
+	}
 	return (1);
 }
 
-void		pf_parse(t_pf_format *f)
+void	pf_parse(t_pf_format *f)
 {
 	while (*f->s && !(f->pf_flags & PF_ERROR))
+	{
 		if (*f->s != '%')
 			pf_putchar(f, *f->s++);
-		else if ((pf_parse_flags(f) && *f->s == '%')
-				|| *f->s == 'c')
+		else if ((pf_parse_flags(f) && *f->s == '%') || *f->s == 'c')
 			pf_parse_c(f);
 		else if (*f->s == 's')
 			pf_parse_s(f, va_arg(f->valst, char *));
@@ -92,4 +112,5 @@ void		pf_parse(t_pf_format *f)
 			pf_parse_u(f, pf_va_arg_unsigned(f->flags, f->valst));
 		else if (*f->s == 'x' || *f->s == 'X')
 			pf_parse_x(f, pf_va_arg_unsigned(f->flags, f->valst));
+	}
 }

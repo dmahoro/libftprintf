@@ -6,7 +6,7 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 20:03:24 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/04/19 20:03:27 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/05/03 20:18:11 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,8 @@ int	ft_vdprintf(int fd, const char *format, va_list args)
 	pf_parse(&f);
 	if (f.i)
 		pf_flush_buffer(&f);
-	return (f->pf_flags & PF_ERROR ? -1 : f->size);
+	if (f->pf_flags & PF_ERROR)
+		return (-1);
+	else
+		return (f->size);
 }

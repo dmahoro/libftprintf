@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_parse_cs.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/03 20:11:41 by dmahoro-          #+#    #+#             */
+/*   Updated: 2021/05/03 21:53:25 by dmahoro-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -9,12 +20,21 @@ static void	pf_parse_ls(t_pf_format *f, wchar_t *s)
 		s = L"(null)";
 	i = 0;
 	while (s[i++] != L'\0' && (f->precision < 0
-		|| (f->precision >= 0 && f->dsize
-			+ pf_wclen(s[i]) <= f->precision)))
+			|| (f->precision >= 0 && f->dsize
+				+ pf_wclen(s[i]) <= f->precision)))
 		f->dsize += pf_wclen(s[i]);
 	if (f->precision >= 0 || (f->flags & PF_FL_MINUS))
-		f->flags &-= ~PF_ZERO;
-
+		f->flags = ~PF_ZERO;
+	if ((f->precision >= 0) && (f->precision < f->dsize))
+		f->dsize = f->precision;
+	f->width -= f->dsize;
+	if (f->width < 0)
+		f->width = 0;
+	if (!(f->flags & PF_MINUS))
+		pf_putpadding(f);
+	f->dsize -= pf_wclen(*s);
+	while (f->dsize >= 0)
+		pf_putwchar(f, *s++);
 }
 
 void	pf_parse_c(t_pf_format *f)

@@ -1,11 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_parse_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/03 22:43:04 by dmahoro-          #+#    #+#             */
+/*   Updated: 2021/05/03 22:49:50 by dmahoro-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	handle_case(int i)
+{
+	if (i < 10)
+		return (i + '0');
+	else
+		return (i + (lower + 'A' - 10));
+}
 
 char	*pf_convert(t_pf_format *f, uint64_t n, int base, int lower)
 {
 	char	*d;
-	int	i;
-	int	c;
+	int		i;
+	int		c;
 
 	if (lower)
 		lower = 32;
@@ -21,10 +40,7 @@ char	*pf_convert(t_pf_format *f, uint64_t n, int base, int lower)
 			c = 1;
 		}
 		i = n % base;
-		if (i < 10)
-			*--d = i + '0';
-		else
-			*--d = i + (lower + 'A' - 10);
+		*--d = handle_case(i);
 		n /= base;
 	}
 	f->dsize = f->conv + PF_CONVERT_BUFF_SIZE - d;
