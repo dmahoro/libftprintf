@@ -6,18 +6,20 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:12:38 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/05/03 22:21:53 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/05/06 17:36:54 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "ft_printf.h"
+#include "libft.h"
 
 void	pf_init(t_pf_format *f, const char *format, va_list argsptrs)
 {
 	f->conv[PF_CONVERT_BUFF_SIZE] = '\0';
 	f->i = 0;
 	f->s = format;
-	va_copy(f->argsptrs, argsptrs);
+	va_copy(f->valst, argsptrs);
 	f->pf_flags = 0;
 	f->size = 0;
 }
@@ -28,7 +30,7 @@ void	pf_flush_buffer(t_pf_format *f)
 		return ;
 	if (f->pf_flags & PF_USE_STR)
 	{
-		if (f->pflags & PF_USE_LEFT)
+		if (f->pf_flags & PF_USE_LEFT)
 		{
 			if (!f->left || f->left - 1 < (size_t)f->i)
 			{

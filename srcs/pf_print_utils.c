@@ -6,7 +6,7 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 22:50:12 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/05/03 22:55:44 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/05/06 17:46:47 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	pf_putpadding(t_pf_format *f)
 {
 	char	c;
 
-	if (f->flags & PF_FL_ZERO)
+	if (f->flags & PF_ZERO)
 		c = '0';
 	else
 		c = ' ';

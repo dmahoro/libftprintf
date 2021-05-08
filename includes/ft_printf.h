@@ -6,7 +6,7 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 20:01:42 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/05/05 10:19:21 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/05/06 17:41:49 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef struct s_pf_format
 	int						fd;
 	char					*str;
 	t_flag flags		 : 	PF_E_FLAG_MAX;
-	size_t					dsize;
+	int						dsize;
 	int						precision;
-	size_t					width;
+	int						width;
 }	t_pf_format;
 
 int			ft_printf(char const *format, ...);
