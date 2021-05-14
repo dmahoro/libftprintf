@@ -10,12 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC			= gcc
-NAME		= libftprintf.a
+CC			= g++
+NAME		= libftprintfCPP.a
 CFLAGS		= -Wall -Wextra -Werror
 DEBUG		= -g3
 
-LIBFT		= libft/libft.a
+LIBFT		= libftCPP.a
 SRCS_DIR	= srcs
 INCLS_DIR	= includes
 BUILD_DIR	= build
@@ -37,7 +37,6 @@ INCLS		= $(addprefix $(INCLS_DIR)/, $(INCLS_FLS))
 
 
 $(NAME): $(OBJS)
-	$(MAKE) bonus -C ./libft
 	cp $(LIBFT) $(NAME)
 	ar -rcs $@ $^
 
@@ -48,11 +47,9 @@ $(OBJS):
 all: $(NAME)
 
 clean:
-	$(MAKE) clean -C ./libft
 	rm -f $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
 	rm -f $(NAME)
 
 re: fclean all
