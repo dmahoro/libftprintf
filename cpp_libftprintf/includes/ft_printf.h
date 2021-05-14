@@ -6,7 +6,7 @@
 /*   By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 20:01:42 by dmahoro-          #+#    #+#             */
-/*   Updated: 2021/05/06 17:41:49 by dmahoro-         ###   ########.fr       */
+/*   Updated: 2021/05/14 11:59:15 by dmahoro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 # define PF_BUFF_SIZE 128
 # define PF_CONVERT_BUFF_SIZE 80
 
-typedef enum e_flag
-{
+typedef enum e_flag {
 	PF_MINUS = 0x1,
 	PF_ZERO = 0x2,
 	PF_APOSTROPHE = 0x4,

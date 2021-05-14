@@ -6,13 +6,14 @@
 #    By: dmahoro- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/05 23:00:48 by dmahoro-          #+#    #+#              #
-#    Updated: 2021/05/06 00:55:35 by dmahoro-         ###   ########.fr        #
+#    Updated: 2021/05/14 11:53:37 by dmahoro-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= g++
 NAME		= libftprintfCPP.a
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -std=c++11 -Wall -Wextra
+#CFLAGS		= -std=c99 -Wall -Wextra -Werror
 DEBUG		= -g3
 
 LIBFT		= libftCPP.a
